@@ -1,0 +1,22 @@
+accelerate==0.21.0
+bitsandbytes==0.40.2
+huggingface-hub==0.16.4
+llama-cpp-python==0.1.78
+nvidia-cublas-cu11==11.10.3.66
+nvidia-cuda-cupti-cu11==11.7.101
+nvidia-cuda-nvrtc-cu11==11.7.99
+nvidia-cuda-runtime-cu11==11.7.99
+nvidia-cudnn-cu11==8.5.0.96
+nvidia-cufft-cu11==10.9.0.58
+nvidia-curand-cu11==10.2.10.91
+nvidia-cusolver-cu11==11.4.0.1
+nvidia-cusparse-cu11==11.7.4.91
+nvidia-nccl-cu11==2.14.3
+nvidia-nvtx-cu11==11.7.91
+peft @ git+https://github.com/huggingface/peft.git@e06d94ddeb6c70913593740618df76908b918d66
+torch==2.0.1
+torchaudio==2.0.2
+torchvision==0.15.2
+transformers @ git+https://github.com/huggingface/transformers.git@6112b1c6442aaf7affd2b0676a1cd4eee30c45cf
+wandb==0.15.8
+fastapi
