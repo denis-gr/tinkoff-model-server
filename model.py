@@ -1,4 +1,10 @@
 import logging
+import os
+
+MODEL_NAME = os.environ.get("MODEL_MODEL_NAME", "meta-llama/Llama-2-7b-chat-hf")
+DEVICE = os.environ.get("MODEL_DEVICE", "auto")
+CONTEXT_WINDOW = os.environ.get("MODEL_CONTEXT_WINDOW", 2048)
+MAX_NEW_TOKEN = os.environ.get("MODEL_MAX_NEW_TOKEN", 256)
 
 import torch
 from transformers import (
@@ -12,17 +18,18 @@ logger = logging.getLogger(__name__)
 class LLM:
     def __init__(
         self,
-        context_window = 2048,
-        max_new_tokens = 256,
-        tokenizer_name = "denisgr04/guap",
-        model_name = "denisgr04/guap",
+        context_window = CONTEXT_WINDOW,
+        max_new_tokens = MAX_NEW_TOKEN,
+        tokenizer_name = MODEL_NAME,
+        model_name = MODEL_NAME,
         model = None,
         tokenizer = None,
-        device_map = "auto",
+        device_map = DEVICE,
         tokenizer_kwargs = {},
         model_kwargs = {},
         generate_kwargs = {}
     ):
+        context_window, max_new_tokens = int(context_window), int(max_new_tokens)
 
         self._model = model or AutoModelForCausalLM.from_pretrained(
             model_name, load_in_8bit=True, torch_dtype=torch.float16, device_map=device_map, **model_kwargs)
