@@ -1,5 +1,6 @@
 import logging
 
+import torch
 from transformers import (
     AutoModelForCausalLM,
     AutoTokenizer
@@ -24,7 +25,7 @@ class LLM:
     ):
 
         self._model = model or AutoModelForCausalLM.from_pretrained(
-            model_name, device_map=device_map, **model_kwargs)
+            model_name, load_in_8bit=True, torch_dtype=torch.float16, device_map=device_map, **model_kwargs)
 
         config_dict = self._model.config.to_dict()
         model_context_window = int(
