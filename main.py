@@ -8,5 +8,6 @@ app = FastAPI()
 model = LLM()
 
 @app.post("/complete")
-async def read_item(prompt=Body()):
-    return model.complete(prompt)
+async def read_item(prompt: str = Body()):
+    return { "text": model.complete(prompt) }
+
