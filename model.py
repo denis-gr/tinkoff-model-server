@@ -1,5 +1,4 @@
 import logging
-from typing import Any, List, Optional, Union
 
 from transformers import (
     AutoModelForCausalLM,
@@ -12,17 +11,17 @@ logger = logging.getLogger(__name__)
 class LLM:
     def __init__(
         self,
-        context_window: int = 2048,
-        max_new_tokens: int = 256,
-        tokenizer_name: str = "denisgr04/guap",
-        model_name: str = "denisgr04/guap",
-        model: Optional[Any] = None,
-        tokenizer: Optional[Any] = None,
-        device_map: str = "auto",
-        tokenizer_kwargs: Optional[dict] = {},
-        model_kwargs: Optional[dict] = {},
-        generate_kwargs: Optional[dict] = {},
-    ) -> None:
+        context_window = 2048,
+        max_new_tokens = 256,
+        tokenizer_name = "denisgr04/guap",
+        model_name = "denisgr04/guap",
+        model = None,
+        tokenizer = None,
+        device_map = "auto",
+        tokenizer_kwargs = {},
+        model_kwargs = {},
+        generate_kwargs = {}
+    ):
 
         self._model = model or AutoModelForCausalLM.from_pretrained(
             model_name, device_map=device_map, **model_kwargs)
@@ -42,14 +41,14 @@ class LLM:
             tokenizer_name, **tokenizer_kwargs
         )
 
-        self.context_window=context_window,
-        self.max_new_tokens=max_new_tokens,
-        self.tokenizer_name=tokenizer_name,
-        self.model_name=model_name,
-        self.device_map=device_map,
-        self.tokenizer_kwargs=tokenizer_kwargs or {},
-        self.model_kwargs=model_kwargs or {},
-        self.generate_kwargs=generate_kwargs or {},
+        self.context_window=context_window
+        self.max_new_tokens=max_new_tokens
+        self.tokenizer_name=tokenizer_name
+        self.model_name=model_name
+        self.device_map=device_map
+        self.tokenizer_kwargs=tokenizer_kwargs or {}
+        self.model_kwargs=model_kwargs or {}
+        self.generate_kwargs=generate_kwargs or {}
 
     def complete(self, prompt: str, tokenizer_in_kwargs={},
                  generate_kwargs={},
@@ -65,6 +64,6 @@ class LLM:
         )
         completion_tokens = tokens[0][inputs["input_ids"].size(1) :]
         completion = self._tokenizer.decode(completion_tokens,
-                                            skip_special_tokens=True
+                                            skip_special_tokens=True,
                                             **tokenizer_out_kwargs)
         return completion
