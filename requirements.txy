@@ -20,3 +20,4 @@ torchvision==0.15.2
 transformers @ git+https://github.com/huggingface/transformers.git@6112b1c6442aaf7affd2b0676a1cd4eee30c45cf
 wandb==0.15.8
 fastapi
+uvicorn

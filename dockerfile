@@ -11,4 +11,4 @@ COPY ./requirements.txt /model/requirements.txt
 RUN pip install --no-cache-dir --upgrade --force-reinstall -r /model/requirements.txt
 
 # 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
